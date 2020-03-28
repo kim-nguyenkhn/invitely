@@ -36,15 +36,16 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                     validationSchema={EventSchema}
                     onSubmit={values => console.log(values)}
                 >
-                    {({ handleChange, handleBlur, handleSubmit, values }) => (
+                    {({ errors, handleChange, handleBlur, handleSubmit, touched, values }) => (
                         <View>
                             <FormInput
+                                errorMessage={errors.eventName}
                                 label="Event Name*"
-                                onChangeText={handleChange('eventName')}
-                                onBlur={handleBlur('eventName')}
+                                handleChangeText={handleChange('eventName')}
+                                handleBlur={handleBlur('eventName')}
+                                touched={touched.eventName}
                                 value={values.eventName}
                             />
-
                             <Button onPress={handleSubmit}>Submit</Button>
                         </View>
                     )}

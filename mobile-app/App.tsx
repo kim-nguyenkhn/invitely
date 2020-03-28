@@ -33,11 +33,20 @@ export default function App() {
   return (
     <PaperProvider theme={theme}>
       <NavigationContainer>
-          <Stack.Navigator>
+          <Stack.Navigator
+            screenOptions={{
+              // Do not show a title in the header AppBar
+              headerTitle: ''
+            }}
+          >
             {
               Object.entries(ScreenRoutes)
-                .map(([ screenName, screenComponent ]) => (
-                  <Stack.Screen name={screenName} component={screenComponent} />
+                .map(([ screenName, screenComponent ], index) => (
+                  <Stack.Screen
+                    key={`${screenName}-${index}`}
+                    name={screenName}
+                    component={screenComponent}
+                  />
                 ))
             }
           </Stack.Navigator>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { FAB, List } from 'react-native-paper';
+import { Card, FAB, List } from 'react-native-paper';
 
 import { ScreenNames } from '../App';
 
@@ -23,6 +23,7 @@ export function EventsScreen({ navigation }) {
 
     return (
         <View style={{ height: '100%' }}>
+            <Card.Title title="Events" />
             {events.map(({ title, description }, index) => (
                 <List.Item
                     key={`${title}-${index}`}

@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { Button } from 'react-native-paper';
+import { StyleSheet, View } from 'react-native'
+import { Button, Card } from 'react-native-paper';
 
 export function CreateEventScreen({ navigation }) {
 
@@ -13,7 +13,7 @@ export function CreateEventScreen({ navigation }) {
 
     return (
         <View>
-            <Text>Henlo, Create Your Event</Text>
+            <Card.Title title="Create an event" />
         </View>
     )
 }

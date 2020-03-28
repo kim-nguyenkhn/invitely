@@ -2,20 +2,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import React from 'react';
-// import { StyleSheet, Text, View } from 'react-native';
-import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { Provider as PaperProvider } from 'react-native-paper';
 
 import { CreateEventScreen } from './src/screens/CreateEventScreen';
 import { DashboardScreen } from './src/screens/DashboardScreen';
-
-const theme = {
-    ...DefaultTheme,
-    colors: {
-        ...DefaultTheme.colors,
-        primary: '#8642AF',
-        accent: 'yellow',
-    },
-};
+import { InvitelyTheme } from './src/theme';
 
 const Stack = createStackNavigator();
 
@@ -31,7 +22,7 @@ export const ScreenRoutes = {
 
 export default function App() {
     return (
-        <PaperProvider theme={theme}>
+        <PaperProvider theme={InvitelyTheme}>
             <NavigationContainer>
                 <Stack.Navigator
                     screenOptions={{

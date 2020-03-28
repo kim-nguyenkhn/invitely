@@ -9,5 +9,7 @@ export const EventSchema = yup.object({
 export type Event = yup.InferType<typeof EventSchema>;
 
 export interface Navigation {
+    goBack: () => void;
     navigate: (scene: string) => void;
+    setOptions: (options: unknown) => void;
 }

@@ -5,8 +5,8 @@ import React from 'react';
 // import { StyleSheet, Text, View } from 'react-native';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
-import { CreateEventScreen } from './screens/CreateEventScreen';
-import { EventsScreen } from './screens/EventsScreen';
+import { CreateEventScreen } from './src/screens/CreateEventScreen';
+import { DashboardScreen } from './src/screens/DashboardScreen';
 
 const theme = {
   ...DefaultTheme,
@@ -20,12 +20,12 @@ const theme = {
 const Stack = createStackNavigator();
 
 export enum ScreenNames {
-  Events = "Events",
+  Dashboard = "Dashboard",
   CreateEvent = "CreateEvent"
 }
 
 export const ScreenRoutes = {
-  [ScreenNames.Events]: EventsScreen,
+  [ScreenNames.Dashboard]: DashboardScreen,
   [ScreenNames.CreateEvent]: CreateEventScreen
 };
 

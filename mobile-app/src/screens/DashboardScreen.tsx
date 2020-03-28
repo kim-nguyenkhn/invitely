@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Card, FAB, List } from 'react-native-paper';
+import { FAB, List } from 'react-native-paper';
 
-import { ScreenNames } from '../App';
+import { ScreenNames } from '../../App';
+import { Header } from '../components/Header';
+import { Navigation } from '../types';
 
-export interface Event {
-    title: string;
-    description: string;
+export interface DashboardScreenProps {
+    navigation: Navigation;
 }
 
-export function EventsScreen({ navigation }) {
+export function DashboardScreen({ navigation }: DashboardScreenProps) {
     const [events, setEvents] = useState<Event[]>([]);
 
     useEffect(() => {
@@ -23,7 +24,7 @@ export function EventsScreen({ navigation }) {
 
     return (
         <View style={{ height: '100%' }}>
-            <Card.Title title="Events" />
+            <Header>Events</Header>
             {events.map(({ title, description }, index) => (
                 <List.Item
                     key={`${title}-${index}`}

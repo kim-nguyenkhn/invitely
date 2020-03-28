@@ -3,6 +3,7 @@ import React, { useLayoutEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, RadioButton } from 'react-native-paper';
 
+import { FormDateTimePicker } from '../components/FormDateTimePicker';
 import { FormInput } from '../components/FormInput';
 import { FormRadioGroup } from '../components/FormRadioGroup';
 import { FormSubmitButton } from '../components/FormSubmitButon';
@@ -63,6 +64,8 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                                 touched={touched.eventType}
                                 value={values.eventType}
                             />
+                            {/* DateTimePicker is NOT available on Web */}
+                            <FormDateTimePicker />
                             <FormSubmitButton
                                 isSubmitting={isSubmitting}
                                 handleSubmit={handleSubmit}

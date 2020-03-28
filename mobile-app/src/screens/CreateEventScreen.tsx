@@ -1,8 +1,8 @@
 import { Formik } from 'formik';
-import React, { useLayoutEffect, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import React, { useLayoutEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
-import * as Yup from "Yup";
+import * as Yup from 'Yup';
 
 import { Header } from '../components/Header';
 
@@ -12,9 +12,11 @@ export function CreateEventScreen({ navigation }) {
     useLayoutEffect(() => {
         navigation.setOptions({
             headerLeft: () => <Button onPress={() => navigation.goBack()}>Cancel</Button>,
-            headerRight: () => <Button onPress={() => console.log('nothing happens')}>Save draft</Button>
+            headerRight: () => (
+                <Button onPress={() => console.log('nothing happens')}>Save draft</Button>
+            ),
         });
-    }, [])
+    }, []);
 
     return (
         <View>
@@ -25,18 +27,18 @@ export function CreateEventScreen({ navigation }) {
                 onSubmit={values => console.log(values)}
             >
                 {({ handleChange, handleBlur, handleSubmit, values }) => (
-                <View>
-                    <TextInput
-                    onChangeText={handleChange('email')}
-                    onBlur={handleBlur('email')}
-                    value={values.email}
-                    />
-                    <Button onPress={handleSubmit}>Submit</Button>
-                </View>
+                    <View>
+                        <TextInput
+                            onChangeText={handleChange('email')}
+                            onBlur={handleBlur('email')}
+                            value={values.email}
+                        />
+                        <Button onPress={handleSubmit}>Submit</Button>
+                    </View>
                 )}
             </Formik>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({});

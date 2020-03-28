@@ -1,10 +1,11 @@
-import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import React from 'react';
 // import { StyleSheet, Text, View } from 'react-native';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
+import { CreateEventScreen } from './screens/CreateEventScreen';
 import { EventsScreen } from './screens/EventsScreen';
 
 const theme = {
@@ -18,14 +19,29 @@ const theme = {
 
 const Stack = createStackNavigator();
 
+export enum ScreenNames {
+  Events = "Events",
+  CreateEvent = "CreateEvent"
+}
+
+export const ScreenRoutes = {
+  [ScreenNames.Events]: EventsScreen,
+  [ScreenNames.CreateEvent]: CreateEventScreen
+};
+
 export default function App() {
   return (
-    <NavigationContainer>
-      <PaperProvider theme={theme}>
-        <Stack.Navigator>
-          <Stack.Screen name="Events" component={EventsScreen} />
-        </Stack.Navigator>
-      </PaperProvider>
-    </NavigationContainer>
+    <PaperProvider theme={theme}>
+      <NavigationContainer>
+          <Stack.Navigator>
+            {
+              Object.entries(ScreenRoutes)
+                .map(([ screenName, screenComponent ]) => (
+                  <Stack.Screen name={screenName} component={screenComponent} />
+                ))
+            }
+          </Stack.Navigator>
+      </NavigationContainer>
+    </PaperProvider>
   );
 }

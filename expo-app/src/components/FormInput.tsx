@@ -10,7 +10,7 @@ export function FormInput({ label, onChangeText, onBlur, value }) {
     return (
         <View>
             <Text style={styles.label}>{label}</Text>
-            <TextInput onChangeText={onChangeText} onBlur={onBlur} value={value} />
+            <TextInput mode="outlined" onChangeText={onChangeText} onBlur={onBlur} value={value} />
         </View>
     );
 }

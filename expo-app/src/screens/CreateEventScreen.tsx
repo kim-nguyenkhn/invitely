@@ -1,14 +1,23 @@
 import { Formik } from 'formik';
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, TextInput } from 'react-native-paper';
-import * as Yup from 'Yup';
+import { Button } from 'react-native-paper';
 
+import { FormInput } from '../components/FormInput';
 import { Header } from '../components/Header';
+import { Event, EventSchema, Navigation } from '../types';
 
-export function CreateEventScreen({ navigation }) {
-    const [eventName, setEventName] = useState<string>('');
+const initialValues: Event = {
+    eventDescription: '',
+    eventName: '',
+    eventType: '',
+};
 
+interface CreateEventScreenProps {
+    navigation: Navigation;
+}
+
+export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
     useLayoutEffect(() => {
         navigation.setOptions({
             headerLeft: () => <Button onPress={() => navigation.goBack()}>Cancel</Button>,
@@ -21,24 +30,35 @@ export function CreateEventScreen({ navigation }) {
     return (
         <View>
             <Header>Create an event</Header>
-            <Formik
-                initialValues={{ email: '' }}
-                validationSchema={Yup}
-                onSubmit={values => console.log(values)}
-            >
-                {({ handleChange, handleBlur, handleSubmit, values }) => (
-                    <View>
-                        <TextInput
-                            onChangeText={handleChange('email')}
-                            onBlur={handleBlur('email')}
-                            value={values.email}
-                        />
-                        <Button onPress={handleSubmit}>Submit</Button>
-                    </View>
-                )}
-            </Formik>
+            <View style={styles.form}>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={EventSchema}
+                    onSubmit={values => console.log(values)}
+                >
+                    {({ handleChange, handleBlur, handleSubmit, values }) => (
+                        <View>
+                            <FormInput
+                                label="Event Name*"
+                                onChangeText={handleChange('eventName')}
+                                onBlur={handleBlur('eventName')}
+                                value={values.eventName}
+                            />
+
+                            <Button onPress={handleSubmit}>Submit</Button>
+                        </View>
+                    )}
+                </Formik>
+            </View>
         </View>
     );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    form: {
+        paddingLeft: 45,
+        paddingRight: 45,
+        paddingTop: 16,
+        paddingBottom: 16,
+    },
+});

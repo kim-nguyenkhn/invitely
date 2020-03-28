@@ -1,6 +1,11 @@
 {
-    "extends": "tslint:recommended",
+    "extends": [
+        "tslint:latest",
+        "tslint-react",
+        "tslint-config-prettier"
+    ],
     "rules": {
-        // "ordered-imports": [true]
+        "jsx-no-lambda": false,
+        "ordered-imports": true
     }
 }

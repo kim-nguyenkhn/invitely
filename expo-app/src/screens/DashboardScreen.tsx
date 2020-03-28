@@ -4,7 +4,7 @@ import { FAB, List } from 'react-native-paper';
 
 import { ScreenNames } from '../../App';
 import { Header } from '../components/Header';
-import { Navigation } from '../types';
+import { Event, Navigation } from '../types';
 
 export interface DashboardScreenProps {
     navigation: Navigation;
@@ -16,27 +16,28 @@ export function DashboardScreen({ navigation }: DashboardScreenProps) {
     useEffect(() => {
         // TODO(backend): pull events from backend
         const SAMPLE_EVENT: Event = {
-            title: "First Event",
-            description: "Kim's Birthday on March 24th"
+            eventName: 'First Event',
+            eventDescription: "Kim's Birthday on March 24th",
         };
+
         setEvents([SAMPLE_EVENT, SAMPLE_EVENT, SAMPLE_EVENT]);
     }, []);
 
     return (
         <View style={{ height: '100%' }}>
             <Header>Events</Header>
-            {events.map(({ title, description }, index) => (
+            {events.map(({ eventName, eventDescription }, index) => (
                 <List.Item
-                    key={`${title}-${index}`}
-                    description={description}
+                    key={`${eventName}-${index}`}
+                    description={eventDescription}
                     left={() => <List.Icon icon="folder" />}
-                    title={title}
+                    title={eventName}
                 />
             ))}
             <FAB
                 icon="plus"
                 onPress={() => navigation.navigate(ScreenNames.CreateEvent)}
-                small
+                small={true}
                 style={styles.fab}
             />
         </View>
@@ -45,10 +46,10 @@ export function DashboardScreen({ navigation }: DashboardScreenProps) {
 
 const styles = StyleSheet.create({
     fab: {
-        backgroundColor: "#eee",
+        backgroundColor: '#eee',
         position: 'absolute',
         margin: 16,
         right: 0,
         bottom: 0,
     },
-  })
+});

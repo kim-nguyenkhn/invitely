@@ -25,7 +25,7 @@ export function FormInput({
     value,
 }: FormInputProps) {
     return (
-        <View>
+        <View style={styles.container}>
             <Text style={styles.label}>{label}</Text>
             <TextInput
                 error={!!(touched && errorMessage)}
@@ -42,6 +42,9 @@ export function FormInput({
 }
 
 const styles = StyleSheet.create({
+    container: {
+        marginBottom: 25,
+    },
     label: {
         marginBottom: 16,
     },

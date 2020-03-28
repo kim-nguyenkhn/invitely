@@ -1,9 +1,11 @@
 import { Formik } from 'formik';
 import React, { useLayoutEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Button, RadioButton } from 'react-native-paper';
 
 import { FormInput } from '../components/FormInput';
+import { FormRadioGroup } from '../components/FormRadioGroup';
+import { FormSubmitButton } from '../components/FormSubmitButon';
 import { Header } from '../components/Header';
 import { Event, EventSchema, Navigation } from '../types';
 
@@ -36,7 +38,15 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                     validationSchema={EventSchema}
                     onSubmit={values => console.log(values)}
                 >
-                    {({ errors, handleChange, handleBlur, handleSubmit, touched, values }) => (
+                    {({
+                        errors,
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                        isSubmitting,
+                        touched,
+                        values,
+                    }) => (
                         <View>
                             <FormInput
                                 errorMessage={errors.eventName}
@@ -46,7 +56,17 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                                 touched={touched.eventName}
                                 value={values.eventName}
                             />
-                            <Button onPress={handleSubmit}>Submit</Button>
+                            <FormRadioGroup
+                                errorMessage={errors.eventType}
+                                label="Event Type*"
+                                handleChange={handleChange('eventType')}
+                                touched={touched.eventType}
+                                value={values.eventType}
+                            />
+                            <FormSubmitButton
+                                isSubmitting={isSubmitting}
+                                handleSubmit={handleSubmit}
+                            />
                         </View>
                     )}
                 </Formik>

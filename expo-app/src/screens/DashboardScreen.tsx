@@ -37,7 +37,6 @@ export function DashboardScreen({ navigation }: DashboardScreenProps) {
             <FAB
                 icon="plus"
                 onPress={() => navigation.navigate(ScreenNames.CreateEvent)}
-                small={true}
                 style={styles.fab}
             />
         </View>

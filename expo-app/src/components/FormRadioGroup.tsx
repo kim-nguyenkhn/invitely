@@ -10,7 +10,9 @@ export function FormRadioGroup({ errorMessage, label, handleChange, touched, val
                 <RadioButton.Item label="Single Day" value="Single" />
                 <RadioButton.Item label="Multi Day" value="Multi" />
             </RadioButton.Group>
-            {errorMessage && <Caption style={styles.errorMessage}>{errorMessage}</Caption>}
+            {touched && errorMessage && (
+                <Caption style={styles.errorMessage}>{errorMessage}</Caption>
+            )}
         </View>
     );
 }

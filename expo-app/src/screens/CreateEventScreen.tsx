@@ -46,6 +46,7 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                         handleBlur,
                         handleSubmit,
                         isSubmitting,
+                        setFieldValue,
                         touched,
                         values,
                     }) => (
@@ -68,8 +69,9 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                             {/* DateTimePicker is NOT available on Web */}
                             <FormDateTimePicker
                                 errorMessage={errors.startTime}
+                                fieldName="startTime"
                                 label="Start"
-                                handleChangeDateTime={handleChange('startTime')}
+                                handleChangeDateTime={setFieldValue}
                                 touched={touched.startTime}
                                 value={values.startTime}
                             />

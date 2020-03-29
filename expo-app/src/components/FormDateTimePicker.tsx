@@ -2,35 +2,41 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import React, { useState } from 'react';
 import { StyleSheet, Platform, View, Keyboard, KeyboardAvoidingView } from 'react-native';
 import { Text, TextInput, Caption } from 'react-native-paper';
-import { FormikTouched } from 'formik';
+import { FormikTouched, FormikErrors } from 'formik';
 
 type DateTimePickerMode = 'date' | 'time';
 
 function formatDateToMonthDayYear(d: Date) {
-    // Note that Date.getMonth() and Date.getDate() return zero-based values
-    return `${d.getMonth() + 1}/${d.getDate() + 1}/${d.getFullYear()}`;
+    // Note that Date.getMonth() returns zero-based values, hence +1
+    return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
 }
 
 function formatDateToHoursMinutes(d: Date) {
-    // Note that Date.getHours() returns a zero-based value
-    let hours = d.getHours() + 1;
+    let hours = d.getHours();
+    // Add a leading 0 to single digit minutes
+    let minutes = (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
+
     if (hours > 12) {
         // Convert 24-hour time to 12-hour time
         hours -= 12;
+        return `${hours}:${minutes}pm`;
+    } else {
+        return `${hours}:${minutes}am`;
     }
-    return `${hours}-${d.getMinutes()}`;
 }
 
 interface FormDateTimePickerProps {
-    errorMessage: any;
-    label: any;
+    errorMessage: FormikErrors<Date>;
+    fieldName: string;
+    label: string;
     handleChangeDateTime: any;
     touched: FormikTouched<Date>;
-    value: any;
+    value: Date;
 }
 
 export function FormDateTimePicker({
     errorMessage,
+    fieldName,
     label,
     handleChangeDateTime,
     touched,
@@ -40,10 +46,10 @@ export function FormDateTimePicker({
     const [show, setShow] = useState<boolean>(false);
 
     const onChange = (event, selectedDate) => {
-        if (selectedDate !== undefined) {
-            handleChangeDateTime(selectedDate);
-        }
         setShow(Platform.OS === 'ios');
+        if (selectedDate !== undefined) {
+            handleChangeDateTime(fieldName, selectedDate);
+        }
     };
 
     const showMode = currentMode => {
@@ -83,7 +89,13 @@ export function FormDateTimePicker({
                 />
             </KeyboardAvoidingView>
             {show && (
-                <DateTimePicker value={value} mode={mode} display="default" onChange={onChange} />
+                <DateTimePicker
+                    minuteInterval={5}
+                    mode={mode}
+                    display="default"
+                    onChange={onChange}
+                    value={value}
+                />
             )}
             {touched && errorMessage && (
                 <Caption style={styles.errorMessage}>{errorMessage}</Caption>

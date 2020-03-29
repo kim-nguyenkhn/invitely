@@ -1,8 +1,9 @@
 import * as yup from 'yup';
 
 export const EventSchema = yup.object({
-    eventDescription: yup.string().notRequired(),
-    eventName: yup.string().max(15, 'Must be 15 characters or less').required(),
+    color: yup.string().notRequired(),
+    description: yup.string().notRequired(),
+    name: yup.string().max(15, 'Must be 15 characters or less').required(),
     eventType: yup.string().oneOf(['Single', 'Multi']).required(),
     startTime: yup.date().required(),
 });

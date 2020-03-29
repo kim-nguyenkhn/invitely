@@ -1,6 +1,6 @@
 import { Formik } from 'formik';
 import React, { useLayoutEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button, Caption } from 'react-native-paper';
 
 import { FormDateTimePicker } from '../components/FormDateTimePicker';
@@ -8,11 +8,14 @@ import { FormInput } from '../components/FormInput';
 import { FormRadioGroup } from '../components/FormRadioGroup';
 import { FormSubmitButton } from '../components/FormSubmitButon';
 import { Header } from '../components/Header';
+import { ViewWithBackground } from '../components/ViewWithBackground';
+import { CustomColors } from '../theme';
 import { Event, EventSchema, Navigation } from '../types';
 
 const initialValues: Event = {
-    eventDescription: '',
-    eventName: '',
+    color: CustomColors.Turquoise,
+    description: '',
+    name: "Kim's Birthday",
     eventType: '',
     startTime: new Date(),
 };
@@ -36,7 +39,7 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
     }, []);
 
     return (
-        <View>
+        <ScrollView>
             <Header>Create an event</Header>
             <View style={styles.form}>
                 <Formik
@@ -55,16 +58,20 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                         values,
                     }) => (
                         <View>
+                            <ViewWithBackground
+                                handleChange={handleChange('color')}
+                                values={values}
+                            />
                             <Caption style={styles.asteriskMessage}>
                                 * indicates required fields
                             </Caption>
                             <FormInput
-                                errorMessage={errors.eventName}
+                                errorMessage={errors.name}
                                 label="Event Name*"
-                                handleChangeText={handleChange('eventName')}
-                                handleBlur={handleBlur('eventName')}
-                                touched={touched.eventName}
-                                value={values.eventName}
+                                handleChangeText={handleChange('name')}
+                                handleBlur={handleBlur('name')}
+                                touched={touched.name}
+                                value={values.name}
                             />
                             <FormRadioGroup
                                 errorMessage={errors.eventType}
@@ -73,7 +80,7 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                                 touched={touched.eventType}
                                 value={values.eventType}
                             />
-                            {/* DateTimePicker is NOT available on Web */}
+                            {/* NOTE: Comment <FormDateTimePicker> if you want to run on Web */}
                             <FormDateTimePicker
                                 errorMessage={errors.startTime}
                                 fieldName="startTime"
@@ -90,7 +97,7 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                     )}
                 </Formik>
             </View>
-        </View>
+        </ScrollView>
     );
 }
 

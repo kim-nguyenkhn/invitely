@@ -30,6 +30,10 @@ export default function App() {
                         screenOptions={{
                             // Do not show a title in the header AppBar
                             headerTitle: '',
+                            cardStyle: {
+                                backgroundColor:
+                                    InvitelyTheme.colors.background,
+                            },
                         }}
                     >
                         {Object.entries(ScreenRoutes).map(

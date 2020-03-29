@@ -10,3 +10,12 @@ export const InvitelyTheme = {
         surface: '#FFFFFF',
     },
 };
+
+export const CustomColors = {
+    // Custom colors
+    Seafoam: '#7CFFAF',
+    Turquoise: '#71CFE8',
+    Indigo: '#8989FF',
+    Lavender: '#DA9BE8',
+    Peach: '#FFBFBC',
+};

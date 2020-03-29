@@ -16,8 +16,8 @@ export function DashboardScreen({ navigation }: DashboardScreenProps) {
     useEffect(() => {
         // TODO(backend): pull events from backend
         const SAMPLE_EVENT: Event = {
-            eventName: 'First Event',
-            eventDescription: "Kim's Birthday on March 24th",
+            name: 'First Event',
+            description: "Kim's Birthday on March 24th",
         };
 
         setEvents([SAMPLE_EVENT, SAMPLE_EVENT, SAMPLE_EVENT]);
@@ -26,12 +26,12 @@ export function DashboardScreen({ navigation }: DashboardScreenProps) {
     return (
         <View style={{ height: '100%' }}>
             <Header>Events</Header>
-            {events.map(({ eventName, eventDescription }, index) => (
+            {events.map(({ name, description }, index) => (
                 <List.Item
-                    key={`${eventName}-${index}`}
-                    description={eventDescription}
+                    key={`${name}-${index}`}
+                    description={description}
                     left={() => <List.Icon icon="folder" />}
-                    title={eventName}
+                    title={name}
                 />
             ))}
             <FAB
@@ -45,7 +45,6 @@ export function DashboardScreen({ navigation }: DashboardScreenProps) {
 
 const styles = StyleSheet.create({
     fab: {
-        backgroundColor: '#eee',
         position: 'absolute',
         margin: 16,
         right: 0,

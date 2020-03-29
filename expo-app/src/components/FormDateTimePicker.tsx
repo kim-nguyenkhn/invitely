@@ -1,8 +1,8 @@
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { FormikErrors, FormikTouched } from 'formik';
 import React, { useState } from 'react';
-import { StyleSheet, Platform, View, Keyboard, KeyboardAvoidingView } from 'react-native';
-import { Text, TextInput, Caption } from 'react-native-paper';
-import { FormikTouched, FormikErrors } from 'formik';
+import { Keyboard, Platform, StyleSheet, View } from 'react-native';
+import { Caption, Text, TextInput } from 'react-native-paper';
 
 type DateTimePickerMode = 'date' | 'time';
 
@@ -14,7 +14,7 @@ function formatDateToMonthDayYear(d: Date) {
 function formatDateToHoursMinutes(d: Date) {
     let hours = d.getHours();
     // Add a leading 0 to single digit minutes
-    let minutes = (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
+    const minutes = (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
 
     if (hours > 12) {
         // Convert 24-hour time to 12-hour time
@@ -68,8 +68,9 @@ export function FormDateTimePicker({
     };
 
     return (
+        // TODO: Fix bugs where selecting date changes time and vice versa
         <View style={styles.container}>
-            <KeyboardAvoidingView behavior="padding">
+            <View>
                 <Text style={styles.label}>{label} Date*</Text>
                 <TextInput
                     mode="outlined"
@@ -77,9 +78,9 @@ export function FormDateTimePicker({
                     placeholder="mm/dd/yyyy"
                     value={formatDateToMonthDayYear(value)}
                 />
-            </KeyboardAvoidingView>
+            </View>
 
-            <KeyboardAvoidingView behavior="padding">
+            <View>
                 <Text style={styles.label}>{label} Time*</Text>
                 <TextInput
                     mode="outlined"
@@ -87,7 +88,7 @@ export function FormDateTimePicker({
                     placeholder="hh:mm"
                     value={formatDateToHoursMinutes(value)}
                 />
-            </KeyboardAvoidingView>
+            </View>
             {show && (
                 <DateTimePicker
                     minuteInterval={5}

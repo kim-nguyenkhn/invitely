@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import React from 'react';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 
 import { CreateEventScreen } from './src/screens/CreateEventScreen';
@@ -23,22 +24,32 @@ export const ScreenRoutes = {
 export default function App() {
     return (
         <PaperProvider theme={InvitelyTheme}>
-            <NavigationContainer>
-                <Stack.Navigator
-                    screenOptions={{
-                        // Do not show a title in the header AppBar
-                        headerTitle: '',
-                    }}
-                >
-                    {Object.entries(ScreenRoutes).map(([screenName, screenComponent], index) => (
-                        <Stack.Screen
-                            key={`${screenName}-${index}`}
-                            name={screenName}
-                            component={screenComponent}
-                        />
-                    ))}
-                </Stack.Navigator>
-            </NavigationContainer>
+            <SafeAreaView style={styles.topLevelContainer}>
+                <NavigationContainer>
+                    <Stack.Navigator
+                        screenOptions={{
+                            // Do not show a title in the header AppBar
+                            headerTitle: '',
+                        }}
+                    >
+                        {Object.entries(ScreenRoutes).map(
+                            ([screenName, screenComponent], index) => (
+                                <Stack.Screen
+                                    key={`${screenName}-${index}`}
+                                    name={screenName}
+                                    component={screenComponent}
+                                />
+                            )
+                        )}
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </SafeAreaView>
         </PaperProvider>
     );
 }
+
+const styles = StyleSheet.create({
+    topLevelContainer: {
+        flex: 1,
+    },
+});

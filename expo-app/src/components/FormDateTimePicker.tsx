@@ -7,25 +7,6 @@ import { Caption, Text, TextInput } from 'react-native-paper';
 
 type DateTimePickerMode = 'date' | 'time';
 
-function formatDateToMonthDayYear(d: Date) {
-    // Note that Date.getMonth() returns zero-based values, hence +1
-    return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
-}
-
-function formatDateToHoursMinutes(d: Date) {
-    let hours = d.getHours();
-    // Add a leading 0 to single digit minutes
-    const minutes = (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
-
-    if (hours > 12) {
-        // Convert 24-hour time to 12-hour time
-        hours -= 12;
-        return `${hours}:${minutes}pm`;
-    } else {
-        return `${hours}:${minutes}am`;
-    }
-}
-
 interface FormDateTimePickerProps {
     errorMessage: FormikErrors<Date>;
     fieldName: string;
@@ -71,8 +52,8 @@ export function FormDateTimePicker({
     return (
         // TODO: Fix bugs where selecting date changes time and vice versa
         <View style={styles.container}>
-            <View>
-                <Text style={styles.label}>{label} Date*</Text>
+            <View style={styles.labelAndInputContainer}>
+                <Text>{label} Date*</Text>
                 <View style={styles.inputContainer}>
                     <TextInput
                         style={styles.inputField}
@@ -81,16 +62,15 @@ export function FormDateTimePicker({
                         placeholder="mm/dd/yyyy"
                         value={formatDateToMonthDayYear(value)}
                     />
-                    <MaterialCommunityIcons
+                    {/* <MaterialCommunityIcons
                         style={styles.inputIcon}
                         name="calendar"
                         size={24}
-                    />
+                    /> */}
                 </View>
             </View>
-
             <View>
-                <Text style={styles.label}>{label} Time*</Text>
+                <Text>{label} Time*</Text>
                 <View style={styles.inputContainer}>
                     <TextInput
                         style={styles.inputField}
@@ -99,11 +79,11 @@ export function FormDateTimePicker({
                         placeholder="hh:mm"
                         value={formatDateToHoursMinutes(value)}
                     />
-                    <MaterialCommunityIcons
+                    {/* <MaterialCommunityIcons
                         style={styles.inputIcon}
                         name="clock-outline"
                         size={24}
-                    />
+                    /> */}
                 </View>
             </View>
             {show && (
@@ -129,15 +109,36 @@ const styles = StyleSheet.create({
     errorMessage: {
         color: 'red',
     },
-    label: {},
+    labelAndInputContainer: {
+        marginBottom: 8,
+    },
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
     },
-    inputIcon: {
-        marginLeft: 8,
-    },
     inputField: {
         flex: 1,
     },
+    inputIcon: {
+        marginRight: 8,
+    },
 });
+
+function formatDateToMonthDayYear(d: Date) {
+    // Note that Date.getMonth() returns zero-based values, hence +1
+    return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+}
+
+function formatDateToHoursMinutes(d: Date) {
+    let hours = d.getHours();
+    // Add a leading 0 to single digit minutes
+    const minutes = (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
+
+    if (hours > 12) {
+        // Convert 24-hour time to 12-hour time
+        hours -= 12;
+        return `${hours}:${minutes}pm`;
+    } else {
+        return `${hours}:${minutes}am`;
+    }
+}

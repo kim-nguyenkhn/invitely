@@ -26,7 +26,7 @@ export function FormInput({
 }: FormInputProps) {
     return (
         <View style={styles.container}>
-            <Text style={styles.label}>{label}</Text>
+            <Text>{label}</Text>
             <TextInput
                 error={!!(touched && errorMessage)}
                 mode="outlined"
@@ -43,10 +43,7 @@ export function FormInput({
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 25,
-    },
-    label: {
-        marginBottom: 16,
+        marginBottom: 15,
     },
     errorMessage: {
         color: 'red',

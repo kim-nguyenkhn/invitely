@@ -1,3 +1,4 @@
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { FormikErrors, FormikTouched } from 'formik';
 import React, { useState } from 'react';
@@ -72,22 +73,38 @@ export function FormDateTimePicker({
         <View style={styles.container}>
             <View>
                 <Text style={styles.label}>{label} Date*</Text>
-                <TextInput
-                    mode="outlined"
-                    onFocus={showDatePicker}
-                    placeholder="mm/dd/yyyy"
-                    value={formatDateToMonthDayYear(value)}
-                />
+                <View style={styles.inputContainer}>
+                    <TextInput
+                        style={styles.inputField}
+                        mode="outlined"
+                        onFocus={showDatePicker}
+                        placeholder="mm/dd/yyyy"
+                        value={formatDateToMonthDayYear(value)}
+                    />
+                    <MaterialCommunityIcons
+                        style={styles.inputIcon}
+                        name="calendar"
+                        size={24}
+                    />
+                </View>
             </View>
 
             <View>
                 <Text style={styles.label}>{label} Time*</Text>
-                <TextInput
-                    mode="outlined"
-                    onFocus={showTimePicker}
-                    placeholder="hh:mm"
-                    value={formatDateToHoursMinutes(value)}
-                />
+                <View style={styles.inputContainer}>
+                    <TextInput
+                        style={styles.inputField}
+                        mode="outlined"
+                        onFocus={showTimePicker}
+                        placeholder="hh:mm"
+                        value={formatDateToHoursMinutes(value)}
+                    />
+                    <MaterialCommunityIcons
+                        style={styles.inputIcon}
+                        name="clock-outline"
+                        size={24}
+                    />
+                </View>
             </View>
             {show && (
                 <DateTimePicker
@@ -113,4 +130,14 @@ const styles = StyleSheet.create({
         color: 'red',
     },
     label: {},
+    inputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    inputIcon: {
+        marginLeft: 8,
+    },
+    inputField: {
+        flex: 1,
+    },
 });

@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import React, { useLayoutEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Button, Caption } from 'react-native-paper';
 
 import { FormDateTimePicker } from '../components/FormDateTimePicker';
 import { FormInput } from '../components/FormInput';
@@ -24,9 +24,13 @@ interface CreateEventScreenProps {
 export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
     useLayoutEffect(() => {
         navigation.setOptions({
-            headerLeft: () => <Button onPress={() => navigation.goBack()}>Cancel</Button>,
+            headerLeft: () => (
+                <Button onPress={() => navigation.goBack()}>Cancel</Button>
+            ),
             headerRight: () => (
-                <Button onPress={() => console.log('nothing happens')}>Save draft</Button>
+                <Button onPress={() => console.log('nothing happens')}>
+                    Save draft
+                </Button>
             ),
         });
     }, []);
@@ -51,6 +55,9 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                         values,
                     }) => (
                         <View>
+                            <Caption style={styles.asteriskMessage}>
+                                * indicates required fields
+                            </Caption>
                             <FormInput
                                 errorMessage={errors.eventName}
                                 label="Event Name*"
@@ -88,6 +95,9 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
 }
 
 const styles = StyleSheet.create({
+    asteriskMessage: {
+        marginBottom: 8,
+    },
     form: {
         paddingLeft: 45,
         paddingRight: 45,

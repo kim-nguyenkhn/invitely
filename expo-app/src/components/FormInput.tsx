@@ -1,6 +1,6 @@
 import { FormikHandlers } from 'formik';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { Caption, Text, TextInput } from 'react-native-paper';
 
 interface FormInputProps {
@@ -25,7 +25,7 @@ export function FormInput({
     value,
 }: FormInputProps) {
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView style={styles.container}>
             <Text style={styles.label}>{label}</Text>
             <TextInput
                 error={!!(touched && errorMessage)}
@@ -37,7 +37,7 @@ export function FormInput({
             {touched && errorMessage && (
                 <Caption style={styles.errorMessage}>{errorMessage}</Caption>
             )}
-        </View>
+        </KeyboardAvoidingView>
     );
 }
 

@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import React, { useLayoutEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, RadioButton } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 
 import { FormDateTimePicker } from '../components/FormDateTimePicker';
 import { FormInput } from '../components/FormInput';
@@ -14,6 +14,7 @@ const initialValues: Event = {
     eventDescription: '',
     eventName: '',
     eventType: '',
+    startTime: new Date(),
 };
 
 interface CreateEventScreenProps {
@@ -65,7 +66,13 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                                 value={values.eventType}
                             />
                             {/* DateTimePicker is NOT available on Web */}
-                            <FormDateTimePicker />
+                            <FormDateTimePicker
+                                errorMessage={errors.startTime}
+                                label="Start"
+                                handleChangeDateTime={handleChange('startTime')}
+                                touched={touched.startTime}
+                                value={values.startTime}
+                            />
                             <FormSubmitButton
                                 isSubmitting={isSubmitting}
                                 handleSubmit={handleSubmit}

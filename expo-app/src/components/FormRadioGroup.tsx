@@ -1,8 +1,23 @@
+import { FormikHandlers } from 'formik';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Caption, RadioButton } from 'react-native-paper';
 
-export function FormRadioGroup({ errorMessage, label, handleChange, touched, value }) {
+interface FormRadioGroupProps {
+    errorMessage: string;
+    label: string;
+    handleChange: FormikHandlers['handleChange'];
+    touched: boolean;
+    value: string;
+}
+
+export function FormRadioGroup({
+    errorMessage,
+    label,
+    handleChange,
+    touched,
+    value,
+}: FormRadioGroupProps) {
     return (
         <View style={styles.container}>
             <Text style={styles.label}>{label}</Text>

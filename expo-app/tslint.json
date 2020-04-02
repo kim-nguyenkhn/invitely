@@ -6,6 +6,7 @@
     ],
     "rules": {
         "jsx-no-lambda": false,
-        "ordered-imports": true
+        "ordered-imports": true,
+        "no-console": false
     }
 }

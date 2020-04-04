@@ -30,6 +30,7 @@ export default function App() {
             <SafeAreaView style={styles.topLevelContainer}>
                 <NavigationContainer>
                     <Stack.Navigator
+                        // Should be Login or Dashboard
                         initialRouteName="AddGuests"
                         screenOptions={{
                             // Do not show a title in the header AppBar

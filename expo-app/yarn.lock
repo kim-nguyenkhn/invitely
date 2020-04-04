@@ -4236,6 +4236,11 @@ path-type@^2.0.0:
   dependencies:
     pify "^2.0.0"
 
+phone@^2.4.8:
+  version "2.4.8"
+  resolved "https://registry.yarnpkg.com/phone/-/phone-2.4.8.tgz#4da4c046b4a90ca65ea04f86e99094b50ed518df"
+  integrity sha512-8RO0PfJPzjsWKhbU9W79f7exxkEgjrjbkHqG3psV3SI2q+SJqDEC7We3Ylxivk8XNdoZ8jDs4TPHnqCVs8TwNA==
+
 pify@^2.0.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"

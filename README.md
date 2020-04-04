@@ -8,7 +8,7 @@ Technologies used:
 ## Quickstart
 
 Requirements:
-- Install NodeJS (v12.14 and up): https://nodejs.org/
+- Install Node Version Manager (nvm): https://github.com/nvm-sh/nvm. This will install NodeJS.
 - Download command line tool: `npm install expo-cli --global`
 
 ```shell

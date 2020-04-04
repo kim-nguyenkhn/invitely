@@ -1,13 +1,8 @@
 import * as ExpoContacts from 'expo-contacts';
 import phone from 'phone';
 import React, { useEffect, useMemo, useState } from 'react';
-import {
-    FlatList,
-    ListRenderItemInfo,
-    StyleSheet,
-    Text,
-    View,
-} from 'react-native';
+import { FlatList, ListRenderItemInfo, StyleSheet, View } from 'react-native';
+import { Button, Text } from 'react-native-paper';
 
 import { Header } from '../components/Header';
 import { InvitelyTheme } from '../theme';
@@ -120,8 +115,22 @@ export function AddGuestsScreen() {
         }
     };
 
-    useEffect(() => {
+    /**
+     * Wrapper around requestUserForContacts().
+     */
+    const handlePressAccessPermissions = () => {
         requestUserForContacts().then(setContactsList).catch(console.error);
+    };
+
+    /**
+     * Navigates to Add New Contact screen.
+     */
+    const handlePressAddNewContact = () => {
+        // TODO
+    };
+
+    useEffect(() => {
+        // requestUserForContacts().then(setContactsList).catch(console.error);
 
         return () => {
             setContactsList([]);
@@ -130,12 +139,33 @@ export function AddGuestsScreen() {
 
     return (
         <View>
-            <Header>Add Contacts</Header>
-            <FlatList
-                data={formattedContactsList}
-                keyExtractor={keyExtractor}
-                renderItem={renderContactListItem}
-            />
+            <Header>Invite Guests</Header>
+            {formattedContactsList.length === 0 && (
+                <View>
+                    <Text>
+                        You currently don’t have any contacts to add as guests.
+                        Create a new contact or allow Invitely to access your
+                        permissions.
+                    </Text>
+                    <Button
+                        mode="contained"
+                        onPress={handlePressAccessPermissions}
+                    >
+                        Access permissions
+                    </Button>
+                    <Button mode="outlined" onPress={handlePressAddNewContact}>
+                        Add new contact
+                    </Button>
+                </View>
+            )}
+
+            {formattedContactsList && (
+                <FlatList
+                    data={formattedContactsList}
+                    keyExtractor={keyExtractor}
+                    renderItem={renderContactListItem}
+                />
+            )}
         </View>
     );
 }

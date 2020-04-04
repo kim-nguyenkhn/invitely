@@ -3,6 +3,7 @@ import React, { useLayoutEffect } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button, Caption } from 'react-native-paper';
 
+import { AppBarButton } from '../components/AppBarButton';
 import { FormDateTimePicker } from '../components/FormDateTimePicker';
 import { FormInput } from '../components/FormInput';
 import { FormRadioGroup } from '../components/FormRadioGroup';
@@ -28,12 +29,14 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
     useLayoutEffect(() => {
         navigation.setOptions({
             headerLeft: () => (
-                <Button onPress={() => navigation.goBack()}>Cancel</Button>
+                <AppBarButton onPress={() => navigation.goBack()}>
+                    Cancel
+                </AppBarButton>
             ),
             headerRight: () => (
-                <Button onPress={() => console.log('nothing happens')}>
+                <AppBarButton onPress={() => console.log('nothing happens')}>
                     Save draft
-                </Button>
+                </AppBarButton>
             ),
         });
     }, []);
@@ -108,7 +111,5 @@ const styles = StyleSheet.create({
     form: {
         paddingLeft: 45,
         paddingRight: 45,
-        paddingTop: 16,
-        paddingBottom: 16,
     },
 });

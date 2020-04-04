@@ -10,6 +10,6 @@ npm-debug.*
 *.orig.*
 web-build
 web-report
-
-# macOS
 .DS_Store
+# Prefer to use Yarn
+package-lock.json

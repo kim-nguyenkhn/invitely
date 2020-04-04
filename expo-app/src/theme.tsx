@@ -4,10 +4,13 @@ export const InvitelyTheme = {
     ...DefaultTheme,
     colors: {
         ...DefaultTheme.colors,
-        primary: '#8642AF',
+        primary: '#076FEA',
+        primaryLight: '#36B4FC',
         accent: '#7F4A7D',
         background: '#FFFFFF',
         surface: '#FFFFFF',
+        text: '#000',
+        textLight: '#FFFFFF',
     },
 };
 

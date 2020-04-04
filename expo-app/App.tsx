@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
@@ -24,6 +24,8 @@ export const ScreenRoutes = {
     [ScreenNames.AddGuests]: AddGuestsScreen,
 };
 
+const INITIAL_ROUTE_NAME = ScreenNames.Dashboard;
+
 export default function App() {
     return (
         <PaperProvider theme={InvitelyTheme}>
@@ -31,13 +33,25 @@ export default function App() {
                 <NavigationContainer>
                     <Stack.Navigator
                         // Should be Login or Dashboard
-                        initialRouteName="AddGuests"
+                        initialRouteName={INITIAL_ROUTE_NAME}
                         screenOptions={{
                             // Do not show a title in the header AppBar
                             cardStyle: {
                                 backgroundColor:
                                     InvitelyTheme.colors.background,
                             },
+                            headerBackground: () => (
+                                <LinearGradient
+                                    colors={[
+                                        InvitelyTheme.colors.primary,
+                                        InvitelyTheme.colors.primaryLight,
+                                    ]}
+                                    style={{ flex: 1 }}
+                                    start={{ x: 0, y: 0 }}
+                                    end={{ x: 1, y: 0 }}
+                                />
+                            ),
+                            headerTintColor: InvitelyTheme.colors.textLight,
                             headerTitle: '',
                         }}
                     >

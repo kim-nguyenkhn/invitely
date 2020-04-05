@@ -6,8 +6,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --watch --coverage=false",
-    "test-debug": "jest --watch --coverage=false --onlyChanged"
+    "test": "jest",
+    "test-debug": "jest --watch --coverage=false --onlyChanged",
+    "watch": "jest --watch --coverage=false"
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.6",
@@ -33,6 +34,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
+    "@babel/preset-typescript": "^7.9.0",
+    "@types/jest": "^25.2.1",
     "@types/react": "~16.9.0",
     "@types/react-native": "~0.60.23",
     "@types/yup": "^0.26.33",
@@ -40,6 +43,7 @@
     "jest-expo": "^37.0.0",
     "prettier": "2.0.2",
     "react-native-testing-library": "^1.13.0",
+    "ts-jest": "^25.3.1",
     "tslint": "^6.1.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^4.2.0",

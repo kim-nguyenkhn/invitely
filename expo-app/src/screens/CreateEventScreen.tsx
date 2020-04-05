@@ -1,13 +1,13 @@
 import { Formik } from 'formik';
 import React, { useLayoutEffect } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Button, Caption } from 'react-native-paper';
+import { Caption } from 'react-native-paper';
 
 import { AppBarButton } from '../components/AppBarButton';
 import { FormDateTimePicker } from '../components/FormDateTimePicker';
 import { FormInput } from '../components/FormInput';
 import { FormRadioGroup } from '../components/FormRadioGroup';
-import { FormSubmitButton } from '../components/FormSubmitButon';
+import { FormSubmitButton } from '../components/FormSubmitButton';
 import { Header } from '../components/Header';
 import { ViewWithBackground } from '../components/ViewWithBackground';
 import { CustomColors } from '../theme';
@@ -93,8 +93,8 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                                 value={values.startTime}
                             />
                             <FormSubmitButton
-                                isSubmitting={isSubmitting}
                                 handleSubmit={handleSubmit}
+                                isSubmitting={isSubmitting}
                             />
                         </View>
                     )}

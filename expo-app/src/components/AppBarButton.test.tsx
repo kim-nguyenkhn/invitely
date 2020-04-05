@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render } from 'react-native-testing-library';
+import { render } from 'react-native-testing-library';
 
 import { AppBarButton } from './AppBarButton';
 
@@ -14,7 +14,4 @@ it('renders correctly, with text', () => {
     const wrapper = getByText(content);
 
     expect(wrapper);
-
-    fireEvent(wrapper, 'onPress');
-    expect(mockFunction).toHaveBeenCalled();
 });

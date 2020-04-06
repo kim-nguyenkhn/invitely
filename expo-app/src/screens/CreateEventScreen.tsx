@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
     form: {
-        paddingLeft: 45,
-        paddingRight: 45,
+        paddingLeft: 32,
+        paddingRight: 32,
     },
 });

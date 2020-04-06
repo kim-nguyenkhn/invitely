@@ -13,7 +13,7 @@ interface FormInputProps {
     handleBlur: FormikHandlers['handleBlur'];
     setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
     setFieldTouched: (field: string, isTouched?: boolean, shouldValidate?: boolean) => void;
-    startAdornment?: React.ReactNode;
+    startAdornment?: React.ReactElement;
     touched: boolean;
     value: string;
 }
@@ -38,7 +38,9 @@ export function FormInput({
     return (
         <View style={styles.container}>
             <View style={styles.inputContainer}>
-                {startAdornment}
+                {React.cloneElement(startAdornment, {
+                    style: { marginRight: 16 },
+                })}
                 <TextInput
                     error={!!(touched && errorMessage)}
                     mode="flat"
@@ -67,7 +69,7 @@ export function FormInput({
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 15,
+        marginTop: 16,
     },
     inputContainer: {
         flexDirection: 'row',
@@ -76,6 +78,8 @@ const styles = StyleSheet.create({
     inputElement: {
         backgroundColor: InvitelyTheme.colors.background,
         flex: 1,
+        height: 36,
+        paddingHorizontal: 0,
     },
     errorMessage: {
         color: 'red',

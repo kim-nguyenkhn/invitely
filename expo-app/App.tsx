@@ -24,6 +24,7 @@ export const ScreenRoutes = {
     [ScreenNames.AddGuests]: AddGuestsScreen,
 };
 
+// Should be Login or Dashboard
 const INITIAL_ROUTE_NAME = ScreenNames.Dashboard;
 
 export default function App() {
@@ -32,7 +33,6 @@ export default function App() {
             <SafeAreaView style={styles.topLevelContainer}>
                 <NavigationContainer>
                     <Stack.Navigator
-                        // Should be Login or Dashboard
                         initialRouteName={INITIAL_ROUTE_NAME}
                         screenOptions={{
                             // Do not show a title in the header AppBar

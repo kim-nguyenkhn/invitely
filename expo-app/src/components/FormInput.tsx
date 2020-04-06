@@ -1,49 +1,83 @@
 import { FormikHandlers } from 'formik';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Caption, Text, TextInput } from 'react-native-paper';
+import { Caption, IconButton, TextInput } from 'react-native-paper';
+
+import { InvitelyTheme } from '../theme';
 
 interface FormInputProps {
     errorMessage: string;
+    fieldName: string;
     label: string;
     handleChangeText: FormikHandlers['handleChange'];
     handleBlur: FormikHandlers['handleBlur'];
+    setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
+    setFieldTouched: (field: string, isTouched?: boolean, shouldValidate?: boolean) => void;
+    startAdornment?: React.ReactNode;
     touched: boolean;
     value: string;
 }
 
-/**
- * A FormInput is a custom TextInput that does not use the floating label.
- * Instead, it has an accompanying <Text> element that functions as a label.
- */
 export function FormInput({
     errorMessage,
+    fieldName,
     label,
     handleChangeText,
     handleBlur,
+    setFieldTouched,
+    setFieldValue,
+    startAdornment,
     touched,
     value,
 }: FormInputProps) {
+    const clearTextInput = () => {
+        setFieldValue(fieldName, '');
+        setFieldTouched(fieldName, false);
+    };
+
     return (
         <View style={styles.container}>
-            <Text>{label}</Text>
-            <TextInput
-                error={!!(touched && errorMessage)}
-                mode="outlined"
-                onChangeText={handleChangeText}
-                onBlur={handleBlur}
-                value={value}
-            />
-            {touched && errorMessage && (
-                <Caption style={styles.errorMessage}>{errorMessage}</Caption>
-            )}
+            <View style={styles.inputContainer}>
+                {startAdornment}
+                <TextInput
+                    error={!!(touched && errorMessage)}
+                    mode="flat"
+                    onChangeText={handleChangeText}
+                    onBlur={handleBlur}
+                    placeholder={label}
+                    style={styles.inputElement}
+                    underlineColor={InvitelyTheme.colors.inputsAndButtons}
+                    value={value}
+                />
+                <View>
+                    <IconButton
+                        color={value ? InvitelyTheme.colors.inputsAndButtons : '#fff'}
+                        disabled={!value}
+                        icon="close-circle"
+                        onPress={clearTextInput}
+                    />
+                </View>
+            </View>
+            <View>
+                {touched && errorMessage && (
+                    <Caption style={styles.errorMessage}>{errorMessage}</Caption>
+                )}
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 15,
+        marginTop: 15,
+    },
+    inputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    inputElement: {
+        backgroundColor: InvitelyTheme.colors.background,
+        flex: 1,
     },
     errorMessage: {
         color: 'red',

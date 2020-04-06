@@ -6,11 +6,12 @@ export const InvitelyTheme = {
         ...DefaultTheme.colors,
         primary: '#076FEA',
         primaryLight: '#36B4FC',
-        accent: '#7F4A7D',
-        background: '#FFFFFF',
-        surface: '#FFFFFF',
+        accent: '#076FEA',
+        background: '#FFF',
+        surface: '#FFF',
         text: '#000',
-        textLight: '#FFFFFF',
+        textLight: '#FFF',
+        inputsAndButtons: 'rgba(69, 69, 69, 0.5)',
     },
 };
 

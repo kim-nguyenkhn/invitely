@@ -1,3 +1,4 @@
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Formik } from 'formik';
 import React, { useLayoutEffect } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
@@ -16,7 +17,7 @@ import { Event, EventSchema, Navigation } from '../types';
 const initialValues: Event = {
     color: CustomColors.Turquoise,
     description: '',
-    name: "Kim's Birthday",
+    name: '',
     eventType: '',
     startTime: new Date(),
 };
@@ -26,24 +27,9 @@ interface CreateEventScreenProps {
 }
 
 export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            headerLeft: () => (
-                <AppBarButton onPress={() => navigation.goBack()}>
-                    Cancel
-                </AppBarButton>
-            ),
-            headerRight: () => (
-                <AppBarButton onPress={() => console.log('nothing happens')}>
-                    Save draft
-                </AppBarButton>
-            ),
-        });
-    }, []);
-
     return (
         <ScrollView>
-            <Header>Create an event</Header>
+            <Header>Create Event</Header>
             <View style={styles.form}>
                 <Formik
                     initialValues={initialValues}
@@ -56,23 +42,27 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                         handleBlur,
                         handleSubmit,
                         isSubmitting,
+                        setFieldTouched,
                         setFieldValue,
                         touched,
                         values,
                     }) => (
                         <View>
-                            <ViewWithBackground
+                            {/* <ViewWithBackground
                                 handleChange={handleChange('color')}
                                 values={values}
-                            />
-                            <Caption style={styles.asteriskMessage}>
-                                * indicates required fields
-                            </Caption>
+                            /> */}
                             <FormInput
                                 errorMessage={errors.name}
-                                label="Event Name*"
+                                fieldName="name"
+                                label="Event Name"
                                 handleChangeText={handleChange('name')}
                                 handleBlur={handleBlur('name')}
+                                setFieldTouched={setFieldTouched}
+                                setFieldValue={setFieldValue}
+                                startAdornment={
+                                    <MaterialCommunityIcons name="tag-outline" size={24} />
+                                }
                                 touched={touched.name}
                                 value={values.name}
                             />

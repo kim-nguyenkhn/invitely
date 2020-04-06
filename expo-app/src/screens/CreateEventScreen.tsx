@@ -18,8 +18,7 @@ const initialValues: Event = {
     color: CustomColors.Turquoise,
     description: '',
     name: '',
-    eventType: '',
-    startTime: new Date(),
+    startTime: null,
 };
 
 interface CreateEventScreenProps {
@@ -65,13 +64,6 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                                 }
                                 touched={touched.name}
                                 value={values.name}
-                            />
-                            <FormRadioGroup
-                                errorMessage={errors.eventType}
-                                label="Event Type*"
-                                handleChange={handleChange('eventType')}
-                                touched={touched.eventType}
-                                value={values.eventType}
                             />
                             {/* NOTE: Comment <FormDateTimePicker> if you want to run on Web */}
                             <FormDateTimePicker

@@ -69,8 +69,9 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                             <FormDateTimePicker
                                 errorMessage={errors.startTime}
                                 fieldName="startTime"
-                                label="Start"
-                                handleChangeDateTime={setFieldValue}
+                                label="Date &amp; Time"
+                                setFieldTouched={setFieldTouched}
+                                setFieldValue={setFieldValue}
                                 touched={touched.startTime}
                                 value={values.startTime}
                             />

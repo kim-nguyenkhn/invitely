@@ -3,7 +3,9 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { FormikErrors, FormikTouched } from 'formik';
 import React, { useState } from 'react';
 import { Keyboard, Platform, StyleSheet, View } from 'react-native';
-import { Caption, Text, TextInput } from 'react-native-paper';
+import { Caption, IconButton, TextInput } from 'react-native-paper';
+
+import { InvitelyTheme } from '../theme';
 
 type DateTimePickerMode = 'date' | 'time';
 
@@ -11,7 +13,8 @@ interface FormDateTimePickerProps {
     errorMessage: FormikErrors<Date>;
     fieldName: string;
     label: string;
-    handleChangeDateTime: any;
+    setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
+    setFieldTouched: (field: string, isTouched?: boolean, shouldValidate?: boolean) => void;
     touched: FormikTouched<Date>;
     value: Date;
 }
@@ -20,17 +23,23 @@ export function FormDateTimePicker({
     errorMessage,
     fieldName,
     label,
-    handleChangeDateTime,
+    setFieldValue,
+    setFieldTouched,
     touched,
     value,
 }: FormDateTimePickerProps) {
     const [mode, setMode] = useState<DateTimePickerMode>('date');
     const [show, setShow] = useState<boolean>(false);
 
+    const clearTextInput = () => {
+        setFieldValue(fieldName, null);
+        setFieldTouched(fieldName, false);
+    };
+
     const onChange = (event, selectedDate) => {
         setShow(Platform.OS === 'ios');
         if (selectedDate !== undefined) {
-            handleChangeDateTime(fieldName, selectedDate);
+            setFieldValue(fieldName, selectedDate);
         }
     };
 
@@ -40,6 +49,11 @@ export function FormDateTimePicker({
     };
 
     const showDatePicker = () => {
+        // We have to set a default value for the date as we open the datepicker
+        if (value == null) {
+            setFieldValue(fieldName, new Date());
+        }
+
         Keyboard.dismiss();
         showMode('date');
     };
@@ -50,40 +64,28 @@ export function FormDateTimePicker({
     };
 
     return (
-        // TODO: Fix bugs where selecting date changes time and vice versa
         <View style={styles.container}>
             <View style={styles.labelAndInputContainer}>
-                <Text>{label} Date*</Text>
                 <View style={styles.inputContainer}>
+                    <MaterialCommunityIcons
+                        style={styles.inputStartAdornment}
+                        name="calendar-blank"
+                        size={24}
+                    />
                     <TextInput
-                        style={styles.inputField}
-                        mode="outlined"
+                        style={styles.inputElement}
                         onFocus={showDatePicker}
-                        placeholder="mm/dd/yyyy"
-                        value={formatDateToMonthDayYear(value)}
+                        placeholder={label}
+                        value={stringFromDate(value)}
                     />
-                    {/* <MaterialCommunityIcons
-                        style={styles.inputIcon}
-                        name="calendar"
-                        size={24}
-                    /> */}
-                </View>
-            </View>
-            <View>
-                <Text>{label} Time*</Text>
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        style={styles.inputField}
-                        mode="outlined"
-                        onFocus={showTimePicker}
-                        placeholder="hh:mm"
-                        value={formatDateToHoursMinutes(value)}
-                    />
-                    {/* <MaterialCommunityIcons
-                        style={styles.inputIcon}
-                        name="clock-outline"
-                        size={24}
-                    /> */}
+                    <View>
+                        <IconButton
+                            color={value ? InvitelyTheme.colors.inputsAndButtons : '#fff'}
+                            disabled={!value}
+                            icon="close-circle"
+                            onPress={clearTextInput}
+                        />
+                    </View>
                 </View>
             </View>
             {show && (
@@ -104,7 +106,7 @@ export function FormDateTimePicker({
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 15,
+        marginTop: 16,
     },
     errorMessage: {
         color: 'red',
@@ -116,20 +118,32 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    inputField: {
+    inputElement: {
+        backgroundColor: InvitelyTheme.colors.background,
         flex: 1,
+        height: 36,
+        textAlign: 'left',
+        paddingHorizontal: 0,
     },
-    inputIcon: {
-        marginRight: 8,
+    inputStartAdornment: {
+        marginRight: 16,
     },
 });
 
+function stringFromDate(d: Date) {
+    return d ? d.toLocaleString() : '';
+}
+
 function formatDateToMonthDayYear(d: Date) {
+    if (!d) return null;
+
     // Note that Date.getMonth() returns zero-based values, hence +1
     return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
 }
 
 function formatDateToHoursMinutes(d: Date) {
+    if (!d) return null;
+
     let hours = d.getHours();
     // Add a leading 0 to single digit minutes
     const minutes = (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();

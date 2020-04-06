@@ -37,14 +37,13 @@ export default function App() {
                         screenOptions={{
                             // Do not show a title in the header AppBar
                             cardStyle: {
-                                backgroundColor:
-                                    InvitelyTheme.colors.background,
+                                backgroundColor: InvitelyTheme.colors.background,
                             },
                             headerBackground: () => (
                                 <LinearGradient
                                     colors={[
                                         InvitelyTheme.colors.primary,
-                                        InvitelyTheme.colors.primaryLight,
+                                        InvitelyTheme.colors.accent,
                                     ]}
                                     style={{ flex: 1 }}
                                     start={{ x: 0, y: 0 }}

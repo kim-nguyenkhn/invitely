@@ -5,8 +5,7 @@ export const InvitelyTheme = {
     colors: {
         ...DefaultTheme.colors,
         primary: '#076FEA',
-        primaryLight: '#36B4FC',
-        accent: '#076FEA',
+        accent: '#36B4FC',
         background: '#FFF',
         surface: '#FFF',
         text: '#000',

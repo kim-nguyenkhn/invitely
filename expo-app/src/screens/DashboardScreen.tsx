@@ -34,10 +34,7 @@ export function DashboardScreen({ navigation }: DashboardScreenProps) {
     return (
         <View style={{ height: '100%' }}>
             <LinearGradient
-                colors={[
-                    InvitelyTheme.colors.primary,
-                    InvitelyTheme.colors.primaryLight,
-                ]}
+                colors={[InvitelyTheme.colors.primary, InvitelyTheme.colors.accent]}
                 style={{
                     justifyContent: 'center',
                 }}

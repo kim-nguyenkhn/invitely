@@ -61,7 +61,9 @@ export function FormInput({
                 </View>
             </View>
             <View>
-                {errorMessage && <Caption style={styles.errorMessage}>{errorMessage}</Caption>}
+                {touched && errorMessage && (
+                    <Caption style={styles.errorMessage}>{errorMessage}</Caption>
+                )}
             </View>
         </View>
     );

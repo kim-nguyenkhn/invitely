@@ -38,30 +38,34 @@ export function FormDateTimePicker({
     };
 
     const onChange = (event, selectedDate) => {
+        if (selectedDate === undefined) {
+            // undefined means that picker was cancelled
+            setShow(false);
+            setFieldValue(fieldName, null);
+            return;
+        }
+
         setShow(Platform.OS === 'ios');
         if (selectedDate !== undefined) {
             setFieldValue(fieldName, selectedDate);
         }
     };
 
-    const showMode = currentMode => {
-        setShow(true);
-        setMode(currentMode);
-    };
-
     const showDatePicker = () => {
-        // We have to set a default value for the date as we open the datepicker
+        Keyboard.dismiss();
+        setShow(true);
+        setMode('date');
+
         if (value == null) {
+            // If showing, Datepicker requires a Date or Time as its value
             setFieldValue(fieldName, new Date());
         }
-
-        Keyboard.dismiss();
-        showMode('date');
     };
 
     const showTimePicker = () => {
         Keyboard.dismiss();
-        showMode('time');
+        setShow(true);
+        setMode('time');
     };
 
     return (

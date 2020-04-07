@@ -6,6 +6,7 @@ import { Keyboard, Platform, StyleSheet, View } from 'react-native';
 import { Caption, IconButton, TextInput } from 'react-native-paper';
 
 import { InvitelyTheme } from '../theme';
+import { localeStringFromDate } from '../util/date';
 
 type DateTimePickerMode = 'date' | 'time';
 
@@ -76,7 +77,7 @@ export function FormDateTimePicker({
                         style={styles.inputElement}
                         onFocus={showDatePicker}
                         placeholder={label}
-                        value={stringFromDate(value)}
+                        value={localeStringFromDate(value)}
                     />
                     <View>
                         <IconButton
@@ -129,30 +130,3 @@ const styles = StyleSheet.create({
         marginRight: 16,
     },
 });
-
-function stringFromDate(d: Date) {
-    return d ? d.toLocaleString() : '';
-}
-
-function formatDateToMonthDayYear(d: Date) {
-    if (!d) return null;
-
-    // Note that Date.getMonth() returns zero-based values, hence +1
-    return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
-}
-
-function formatDateToHoursMinutes(d: Date) {
-    if (!d) return null;
-
-    let hours = d.getHours();
-    // Add a leading 0 to single digit minutes
-    const minutes = (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
-
-    if (hours > 12) {
-        // Convert 24-hour time to 12-hour time
-        hours -= 12;
-        return `${hours}:${minutes}pm`;
-    } else {
-        return `${hours}:${minutes}am`;
-    }
-}

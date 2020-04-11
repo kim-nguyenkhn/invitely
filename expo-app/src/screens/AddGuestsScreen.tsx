@@ -1,18 +1,19 @@
 import * as ExpoContacts from 'expo-contacts';
-import phone from 'phone';
 import React, { useEffect, useMemo, useState } from 'react';
 import { FlatList, ListRenderItemInfo, StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 
+import ContentContainer from '../components/ContentContainer';
 import { Header } from '../components/Header';
 import { RoundedButton } from '../components/RoundedButton';
 import { InvitelyTheme } from '../theme';
-import ContentContainer from '../components/ContentContainer';
+import { dedupeArrayByProperty } from '../util/javascript';
+import { E164PhoneNumberFromString, formatPhoneNumberForDisplay } from '../util/phone';
 
 interface FormattedContact {
     fullName: string;
     emails: ExpoContacts.Email[];
-    phoneNumbers: string[];
+    phoneNumbers: ExpoContacts.PhoneNumber[];
 }
 
 export function AddGuestsScreen() {
@@ -25,19 +26,25 @@ export function AddGuestsScreen() {
             .filter((contact: ExpoContacts.Contact) => contact.emails || contact.phoneNumbers)
             .map(contact => {
                 const { emails, name, phoneNumbers } = contact;
-                let cleanedPhoneNumbers: string[];
+                let cleanedPhoneNumbers: ExpoContacts.PhoneNumber[];
 
                 if (phoneNumbers) {
                     // Sanitize phone numbers into E164 format
                     cleanedPhoneNumbers = phoneNumbers.map(
                         (phoneNumber: ExpoContacts.PhoneNumber) => {
-                            // e.g., returns ['+18175698900, 'USA'][0]
-                            return phone(phoneNumber.number)[0];
+                            return {
+                                ...phoneNumber,
+                                // Sanitize/standardize phone number string
+                                number: E164PhoneNumberFromString(
+                                    phoneNumber.number,
+                                    phoneNumber.countryCode
+                                ),
+                            };
                         }
                     );
 
                     // Remove duplicate phone numbers
-                    cleanedPhoneNumbers = [...new Set(cleanedPhoneNumbers)];
+                    cleanedPhoneNumbers = dedupeArrayByProperty(cleanedPhoneNumbers, 'number');
                 }
 
                 return {
@@ -72,13 +79,24 @@ export function AddGuestsScreen() {
      */
     const renderContactListItem = ({ item: contact }: ListRenderItemInfo<FormattedContact>) => {
         return (
-            <Text style={styles.listItemContainer}>
-                <Text>Name: {contact.fullName}</Text>
+            <View style={styles.listItemContainer}>
+                <Text>{contact.fullName}</Text>
                 {contact.emails && <Text>Emails: {JSON.stringify(contact.emails, null, 2)}</Text>}
-                {contact.phoneNumbers && (
-                    <Text>Phone Numbers: {JSON.stringify(contact.phoneNumbers, null, 2)}</Text>
-                )}
-            </Text>
+                {contact.phoneNumbers &&
+                    contact.phoneNumbers.map(
+                        (phoneNumber: ExpoContacts.PhoneNumber, index: number) => {
+                            return (
+                                <Text
+                                    key={`${phoneNumber}-${index}`}
+                                    style={styles.phoneNumberString}
+                                >
+                                    {phoneNumber.label}:&nbsp;
+                                    {formatPhoneNumberForDisplay(phoneNumber.number)}
+                                </Text>
+                            );
+                        }
+                    )}
+            </View>
         );
     };
 
@@ -158,5 +176,8 @@ const styles = StyleSheet.create({
         padding: 20,
         marginVertical: 8,
         marginHorizontal: 16,
+    },
+    phoneNumberString: {
+        textTransform: 'capitalize',
     },
 });

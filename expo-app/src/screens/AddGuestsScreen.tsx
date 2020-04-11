@@ -104,7 +104,9 @@ export function AddGuestsScreen() {
      * Wrapper around requestUserForContacts().
      */
     const handlePressAccessPermissions = () => {
-        requestUserForContacts().then(setContactsList).catch(console.error);
+        requestUserForContacts()
+            .then(response => response && setContactsList(response))
+            .catch(console.error);
     };
 
     /**

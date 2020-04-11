@@ -1,6 +1,8 @@
 import { FormikHandlers, FormikState, FormikValues } from 'formik';
 import React, { useMemo } from 'react';
-import { ActivityIndicator, Button } from 'react-native-paper';
+import { View } from 'react-native';
+
+import { RoundedButton } from './RoundedButton';
 
 export const FORM_SUBMIT_BUTTON_TEXT = 'Submit';
 
@@ -10,19 +12,19 @@ interface FormSubmitButtonProps {
     title?: string;
 }
 
-export function FormSubmitButton({
-    handleSubmit,
-    isSubmitting,
-    title,
-}: FormSubmitButtonProps) {
-    const buttonText = useMemo(
-        () => (title ? title : FORM_SUBMIT_BUTTON_TEXT),
-        [title]
-    );
+export function FormSubmitButton({ handleSubmit, isSubmitting, title }: FormSubmitButtonProps) {
+    const buttonText = useMemo(() => (title ? title : FORM_SUBMIT_BUTTON_TEXT), [title]);
 
     return (
-        <Button disabled={isSubmitting} mode="contained" onPress={handleSubmit}>
-            {isSubmitting ? <ActivityIndicator testID="spinner" /> : buttonText}
-        </Button>
+        <View>
+            <RoundedButton
+                disabled={isSubmitting}
+                loading={isSubmitting}
+                mode="contained"
+                onPress={handleSubmit}
+            >
+                {buttonText}
+            </RoundedButton>
+        </View>
     );
 }

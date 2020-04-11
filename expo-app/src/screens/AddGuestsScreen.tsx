@@ -2,10 +2,12 @@ import * as ExpoContacts from 'expo-contacts';
 import phone from 'phone';
 import React, { useEffect, useMemo, useState } from 'react';
 import { FlatList, ListRenderItemInfo, StyleSheet, View } from 'react-native';
-import { Button, Text } from 'react-native-paper';
+import { Text } from 'react-native-paper';
 
 import { Header } from '../components/Header';
+import { RoundedButton } from '../components/RoundedButton';
 import { InvitelyTheme } from '../theme';
+import ContentContainer from '../components/ContentContainer';
 
 interface FormattedContact {
     fullName: string;
@@ -14,18 +16,13 @@ interface FormattedContact {
 }
 
 export function AddGuestsScreen() {
-    const [contactsList, setContactsList] = useState<ExpoContacts.Contact[]>(
-        []
-    );
+    const [contactsList, setContactsList] = useState<ExpoContacts.Contact[]>([]);
 
     const formattedContactsList: FormattedContact[] = useMemo(() => {
         if (!contactsList.length) return [];
 
         const result: FormattedContact[] = contactsList
-            .filter(
-                (contact: ExpoContacts.Contact) =>
-                    contact.emails || contact.phoneNumbers
-            )
+            .filter((contact: ExpoContacts.Contact) => contact.emails || contact.phoneNumbers)
             .map(contact => {
                 const { emails, name, phoneNumbers } = contact;
                 let cleanedPhoneNumbers: string[];
@@ -73,24 +70,15 @@ export function AddGuestsScreen() {
     /**
      * Renders the actual JSX element to display the Contact.
      */
-    const renderContactListItem = ({
-        item: contact,
-    }: ListRenderItemInfo<FormattedContact>) => {
+    const renderContactListItem = ({ item: contact }: ListRenderItemInfo<FormattedContact>) => {
         return (
-            <View style={styles.listItemContainer}>
+            <Text style={styles.listItemContainer}>
                 <Text>Name: {contact.fullName}</Text>
-                {contact.emails && (
-                    <Text>
-                        Emails: {JSON.stringify(contact.emails, null, 2)}
-                    </Text>
-                )}
+                {contact.emails && <Text>Emails: {JSON.stringify(contact.emails, null, 2)}</Text>}
                 {contact.phoneNumbers && (
-                    <Text>
-                        Phone Numbers:{' '}
-                        {JSON.stringify(contact.phoneNumbers, null, 2)}
-                    </Text>
+                    <Text>Phone Numbers: {JSON.stringify(contact.phoneNumbers, null, 2)}</Text>
                 )}
-            </View>
+            </Text>
         );
     };
 
@@ -102,10 +90,7 @@ export function AddGuestsScreen() {
 
         if (status === 'granted') {
             const { data } = await ExpoContacts.getContactsAsync({
-                fields: [
-                    ExpoContacts.Fields.Emails,
-                    ExpoContacts.Fields.PhoneNumbers,
-                ],
+                fields: [ExpoContacts.Fields.Emails, ExpoContacts.Fields.PhoneNumbers],
             });
 
             return data;
@@ -140,32 +125,30 @@ export function AddGuestsScreen() {
     return (
         <View>
             <Header>Invite Guests</Header>
-            {formattedContactsList.length === 0 && (
-                <View>
-                    <Text>
-                        You currently don’t have any contacts to add as guests.
-                        Create a new contact or allow Invitely to access your
-                        permissions.
-                    </Text>
-                    <Button
-                        mode="contained"
-                        onPress={handlePressAccessPermissions}
-                    >
-                        Access permissions
-                    </Button>
-                    <Button mode="outlined" onPress={handlePressAddNewContact}>
-                        Add new contact
-                    </Button>
-                </View>
-            )}
+            <ContentContainer>
+                {formattedContactsList.length === 0 && (
+                    <View>
+                        <Text>
+                            You currently don’t have any contacts to add as guests. Create a new
+                            contact or allow Invitely to access your permissions.
+                        </Text>
+                        <RoundedButton mode="contained" onPress={handlePressAccessPermissions}>
+                            Access permissions
+                        </RoundedButton>
+                        <RoundedButton mode="outlined" onPress={handlePressAddNewContact}>
+                            Add new contact
+                        </RoundedButton>
+                    </View>
+                )}
 
-            {formattedContactsList && (
-                <FlatList
-                    data={formattedContactsList}
-                    keyExtractor={keyExtractor}
-                    renderItem={renderContactListItem}
-                />
-            )}
+                {formattedContactsList && (
+                    <FlatList
+                        data={formattedContactsList}
+                        keyExtractor={keyExtractor}
+                        renderItem={renderContactListItem}
+                    />
+                )}
+            </ContentContainer>
         </View>
     );
 }

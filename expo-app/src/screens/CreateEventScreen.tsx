@@ -8,12 +8,9 @@ import { FormInput } from '../components/FormInput';
 import { FormSubmitButton } from '../components/FormSubmitButton';
 import { Header } from '../components/Header';
 import { EventSchema } from '../schemas';
-import { CustomColors } from '../theme';
 import { Event, Navigation, ScreenNames } from '../typedefs';
 
 const initialValues: Event = {
-    color: CustomColors.Turquoise,
-    description: '',
     name: '',
     startTime: null,
 };
@@ -31,7 +28,7 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                     initialValues={initialValues}
                     validationSchema={EventSchema}
                     onSubmit={values => {
-                        console.log(`Form values: ${values}`);
+                        console.log('Form values', values);
                         // TODO: Validate the values, then submit them to serverside to save the event to datastore
                         // Then, navigate to AddGuestsScreen
                         navigation.navigate(ScreenNames.AddGuests);
@@ -49,10 +46,6 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                         values,
                     }) => (
                         <View>
-                            {/* <ViewWithBackground
-                                handleChange={handleChange('color')}
-                                values={values}
-                            /> */}
                             <FormInput
                                 errorMessage={errors.name}
                                 fieldName="name"
@@ -67,7 +60,6 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                                 touched={touched.name}
                                 value={values.name}
                             />
-                            {/* NOTE: Comment <FormDateTimePicker> if you want to run on Web */}
                             <FormDateTimePicker
                                 errorMessage={errors.startTime}
                                 fieldName="startTime"
@@ -77,6 +69,7 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                                 touched={touched.startTime}
                                 value={values.startTime}
                             />
+                            {/* TODO: implement Location */}
                             <FormSubmitButton
                                 handleSubmit={handleSubmit}
                                 isSubmitting={isSubmitting}

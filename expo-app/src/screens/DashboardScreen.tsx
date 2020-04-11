@@ -7,6 +7,7 @@ import ContentContainer from '../components/ContentContainer';
 import { Header } from '../components/Header';
 import { InvitelyTheme } from '../theme';
 import { Event, Navigation, ScreenNames } from '../typedefs';
+import { localeStringFromDate } from '../util/date';
 
 export interface DashboardScreenProps {
     navigation: Navigation;
@@ -24,8 +25,8 @@ export function DashboardScreen({ navigation }: DashboardScreenProps) {
 
         // TODO(backend): pull events from backend
         const SAMPLE_EVENT: Event = {
-            name: 'First Event',
-            description: "Kim's Birthday on March 24th",
+            name: 'Birthday Party Tonight!!',
+            startTime: new Date(),
         };
 
         setEvents([SAMPLE_EVENT, SAMPLE_EVENT, SAMPLE_EVENT]);
@@ -52,12 +53,12 @@ export function DashboardScreen({ navigation }: DashboardScreenProps) {
                 </Header>
             </LinearGradient>
             <ContentContainer>
-                {events.map(({ name, description }, index) => (
+                {events.map((event: Event, index) => (
                     <List.Item
-                        key={`${name}-${index}`}
-                        description={description}
-                        left={() => <List.Icon icon="folder" />}
-                        title={name}
+                        key={`${event.name}-${index}`}
+                        description={localeStringFromDate(event.startTime)}
+                        left={() => <List.Icon icon="cake-variant" />}
+                        title={event.name}
                     />
                 ))}
             </ContentContainer>

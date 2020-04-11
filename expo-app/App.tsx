@@ -20,7 +20,8 @@ export const ScreenRoutes = {
 };
 
 // Should be Login or Dashboard
-const INITIAL_ROUTE_NAME = ScreenNames.AddGuests;
+const INITIAL_ROUTE_NAME = ScreenNames.Dashboard;
+// const INITIAL_ROUTE_NAME = ScreenNames.AddGuestsScreen;
 
 export default function App() {
     return (

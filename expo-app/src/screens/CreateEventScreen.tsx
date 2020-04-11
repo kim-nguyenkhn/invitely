@@ -3,6 +3,7 @@ import { Formik } from 'formik';
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
+import ContentContainer from '../components/ContentContainer';
 import { FormDateTimePicker } from '../components/FormDateTimePicker';
 import { FormInput } from '../components/FormInput';
 import { FormSubmitButton } from '../components/FormSubmitButton';
@@ -23,7 +24,7 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
     return (
         <ScrollView>
             <Header>Create Event</Header>
-            <View style={styles.form}>
+            <ContentContainer>
                 <Formik
                     initialValues={initialValues}
                     validationSchema={EventSchema}
@@ -77,7 +78,7 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                         </View>
                     )}
                 </Formik>
-            </View>
+            </ContentContainer>
         </ScrollView>
     );
 }
@@ -85,9 +86,5 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
 const styles = StyleSheet.create({
     asteriskMessage: {
         marginBottom: 8,
-    },
-    form: {
-        paddingLeft: 32,
-        paddingRight: 32,
     },
 });

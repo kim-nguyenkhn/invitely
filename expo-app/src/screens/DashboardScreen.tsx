@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
 import { FAB, List } from 'react-native-paper';
 
+import ContentContainer from '../components/ContentContainer';
 import { Header } from '../components/Header';
 import { InvitelyTheme } from '../theme';
 import { Event, Navigation, ScreenNames } from '../typedefs';
@@ -50,14 +51,16 @@ export function DashboardScreen({ navigation }: DashboardScreenProps) {
                     Events
                 </Header>
             </LinearGradient>
-            {events.map(({ name, description }, index) => (
-                <List.Item
-                    key={`${name}-${index}`}
-                    description={description}
-                    left={() => <List.Icon icon="folder" />}
-                    title={name}
-                />
-            ))}
+            <ContentContainer>
+                {events.map(({ name, description }, index) => (
+                    <List.Item
+                        key={`${name}-${index}`}
+                        description={description}
+                        left={() => <List.Icon icon="folder" />}
+                        title={name}
+                    />
+                ))}
+            </ContentContainer>
             <FAB
                 icon="plus"
                 onPress={() => navigation.navigate(ScreenNames.CreateEvent)}
@@ -71,7 +74,7 @@ const styles = StyleSheet.create({
     fab: {
         backgroundColor: InvitelyTheme.colors.primary,
         position: 'absolute',
-        margin: 16,
+        margin: 20,
         right: 0,
         bottom: 0,
     },

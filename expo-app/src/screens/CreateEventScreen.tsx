@@ -61,6 +61,7 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                                 touched={touched.name}
                                 value={values.name}
                             />
+                            {/* NOTE: Comment DateTimePicker out to run on Web */}
                             <FormDateTimePicker
                                 errorMessage={errors.startTime}
                                 fieldName="startTime"

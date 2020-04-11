@@ -1,24 +1,23 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
-import { InvitelyTheme } from '../theme';
 
 interface RoundedButtonProps {
     color?: string;
+    disabled?: boolean;
+    loading?: boolean;
     onPress: () => void;
     mode?: 'text' | 'outlined' | 'contained' | undefined;
     children?: React.ReactNode;
 }
 
-export function RoundedButton({
-    children,
-    color = InvitelyTheme.colors.primary,
-    onPress,
-    mode = 'contained',
-}: RoundedButtonProps) {
+/**
+ * RoundedButton is the same thing as a react-native-paper Button, but with Invitely styling.
+ */
+export function RoundedButton(props: RoundedButtonProps) {
     return (
-        <Button color={color} mode={mode} onPress={onPress} style={styles.roundedButton}>
-            {children}
+        <Button {...props} style={styles.roundedButton}>
+            {props.children}
         </Button>
     );
 }

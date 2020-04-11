@@ -16,7 +16,7 @@ interface RoundedButtonProps {
  */
 export function RoundedButton(props: RoundedButtonProps) {
     return (
-        <Button {...props} style={styles.roundedButton}>
+        <Button {...props} style={styles.roundedButton} uppercase={false}>
             {props.children}
         </Button>
     );

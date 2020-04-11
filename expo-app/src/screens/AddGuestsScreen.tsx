@@ -128,15 +128,12 @@ export function AddGuestsScreen() {
             <ContentContainer>
                 {formattedContactsList.length === 0 && (
                     <View>
-                        <Text>
-                            You currently don’t have any contacts to add as guests. Create a new
-                            contact or allow Invitely to access your permissions.
-                        </Text>
+                        <Text>You can add guests with the following methods below:</Text>
                         <RoundedButton mode="contained" onPress={handlePressAccessPermissions}>
-                            Access permissions
+                            Import from Contacts
                         </RoundedButton>
                         <RoundedButton mode="outlined" onPress={handlePressAddNewContact}>
-                            Add new contact
+                            Add Manually
                         </RoundedButton>
                     </View>
                 )}

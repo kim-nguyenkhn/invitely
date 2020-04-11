@@ -26,7 +26,7 @@ export function DashboardScreen({ navigation }: DashboardScreenProps) {
         // TODO(backend): pull events from backend
         const SAMPLE_EVENT: Event = {
             name: 'Birthday Party Tonight!!',
-            startTime: new Date(),
+            startDate: new Date(),
         };
 
         setEvents([SAMPLE_EVENT, SAMPLE_EVENT, SAMPLE_EVENT]);
@@ -56,7 +56,7 @@ export function DashboardScreen({ navigation }: DashboardScreenProps) {
                 {events.map((event: Event, index) => (
                     <List.Item
                         key={`${event.name}-${index}`}
-                        description={localeStringFromDate(event.startTime)}
+                        description={localeStringFromDate(event.startDate)}
                         left={() => <List.Icon icon="cake-variant" />}
                         title={event.name}
                     />

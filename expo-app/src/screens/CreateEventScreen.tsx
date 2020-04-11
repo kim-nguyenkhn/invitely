@@ -13,7 +13,7 @@ import { Event, Navigation, ScreenNames } from '../typedefs';
 
 const initialValues: Event = {
     name: '',
-    startTime: null,
+    startDate: null,
 };
 
 interface CreateEventScreenProps {
@@ -63,13 +63,13 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                             />
                             {/* NOTE: Comment DateTimePicker out to run on Web */}
                             <FormDateTimePicker
-                                errorMessage={errors.startTime}
-                                fieldName="startTime"
+                                errorMessage={errors.startDate}
+                                fieldName="startDate"
                                 label="Date &amp; Time"
                                 setFieldTouched={setFieldTouched}
                                 setFieldValue={setFieldValue}
-                                touched={touched.startTime}
-                                value={values.startTime}
+                                touched={touched.startDate}
+                                value={values.startDate}
                             />
                             {/* TODO: implement Location */}
                             <FormSubmitButton

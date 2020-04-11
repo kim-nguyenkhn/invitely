@@ -10,10 +10,7 @@ interface ViewWithBackgroundProps {
     values: FormikValues;
 }
 
-export function ViewWithBackground({
-    handleChange,
-    values,
-}: ViewWithBackgroundProps) {
+export function ViewWithBackground({ handleChange, values }: ViewWithBackgroundProps) {
     const handleColorChange = color => {
         handleChange(CustomColors.Peach);
     };
@@ -30,7 +27,7 @@ export function ViewWithBackground({
             />
             <View style={styles.textContent}>
                 <Text>{values.name}</Text>
-                <Text>{values.startTime.toLocaleString()}</Text>
+                <Text>{values.startDate.toLocaleString()}</Text>
             </View>
         </TouchableOpacity>
     );

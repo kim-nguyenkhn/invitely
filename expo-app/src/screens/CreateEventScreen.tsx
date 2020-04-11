@@ -31,7 +31,7 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                     onSubmit={values => {
                         console.log('Form values', values);
                         // TODO: Validate the values, then submit them to serverside to save the event to datastore
-                        // Then, navigate to AddGuestsScreen
+                        // On success, need to clear the form after submission. Then, navigate to AddGuestsScreen
                         navigation.navigate(ScreenNames.AddGuests);
                     }}
                 >
@@ -83,8 +83,4 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
     );
 }
 
-const styles = StyleSheet.create({
-    asteriskMessage: {
-        marginBottom: 8,
-    },
-});
+const styles = StyleSheet.create({});

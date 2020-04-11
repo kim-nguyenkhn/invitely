@@ -9,14 +9,9 @@ import { AddGuestsScreen } from './src/screens/AddGuestsScreen';
 import { CreateEventScreen } from './src/screens/CreateEventScreen';
 import { DashboardScreen } from './src/screens/DashboardScreen';
 import { InvitelyTheme } from './src/theme';
+import { ScreenNames } from './src/typedefs';
 
 const Stack = createStackNavigator();
-
-export enum ScreenNames {
-    Dashboard = 'Dashboard',
-    CreateEvent = 'CreateEvent',
-    AddGuests = 'AddGuests',
-}
 
 export const ScreenRoutes = {
     [ScreenNames.Dashboard]: DashboardScreen,

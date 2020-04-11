@@ -1,12 +1,11 @@
+import { LinearGradient } from 'expo-linear-gradient';
 import React, { useEffect, useState } from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
 import { FAB, List } from 'react-native-paper';
 
-import { LinearGradient } from 'expo-linear-gradient';
-import { ScreenNames } from '../../App';
 import { Header } from '../components/Header';
 import { InvitelyTheme } from '../theme';
-import { Event, Navigation } from '../types';
+import { Event, Navigation, ScreenNames } from '../typedefs';
 
 export interface DashboardScreenProps {
     navigation: Navigation;

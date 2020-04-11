@@ -1,18 +1,15 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Formik } from 'formik';
-import React, { useLayoutEffect } from 'react';
+import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Caption } from 'react-native-paper';
 
-import { AppBarButton } from '../components/AppBarButton';
 import { FormDateTimePicker } from '../components/FormDateTimePicker';
 import { FormInput } from '../components/FormInput';
-import { FormRadioGroup } from '../components/FormRadioGroup';
 import { FormSubmitButton } from '../components/FormSubmitButton';
 import { Header } from '../components/Header';
-import { ViewWithBackground } from '../components/ViewWithBackground';
+import { EventSchema } from '../schemas';
 import { CustomColors } from '../theme';
-import { Event, EventSchema, Navigation } from '../types';
+import { Event, Navigation, ScreenNames } from '../typedefs';
 
 const initialValues: Event = {
     color: CustomColors.Turquoise,
@@ -33,7 +30,12 @@ export function CreateEventScreen({ navigation }: CreateEventScreenProps) {
                 <Formik
                     initialValues={initialValues}
                     validationSchema={EventSchema}
-                    onSubmit={values => console.log(values)}
+                    onSubmit={values => {
+                        console.log(`Form values: ${values}`);
+                        // TODO: Validate the values, then submit them to serverside to save the event to datastore
+                        // Then, navigate to AddGuestsScreen
+                        navigation.navigate(ScreenNames.AddGuests);
+                    }}
                 >
                     {({
                         errors,

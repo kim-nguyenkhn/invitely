@@ -30,7 +30,7 @@ class Event(db.Model):
 # guests
 class Guest(db.Model):
     guest_id = db.Column(db.Integer, primary_key = True, Index=True, nullable=False)
-    event_id = db.Column(db.Integer, primary_key=True, db.ForeignKey('event.id'), nullable=False)
+    event_id = db.Column(db.Integer, db.ForeignKey('event.id'), primary_key=True, nullable=False)
     time_added = db.Column(db.datetime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
     telephone = db.Column(db.string(20), nullable=True)
     email = db.Column(db.string(120), nullable=True)

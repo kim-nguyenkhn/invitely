@@ -13,3 +13,8 @@ web-report
 .DS_Store
 # Prefer to use Yarn
 package-lock.json
+
+# virtual environments
+.venv
+venv/
+.idea

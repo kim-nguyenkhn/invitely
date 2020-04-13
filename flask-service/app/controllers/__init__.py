@@ -1,0 +1,1 @@
+# Controllers contain business logic surrounding the models.

@@ -33,14 +33,17 @@ Requirements:
 ```shell
 cd flask-service/
 
-# Install dependencies
-pipenv install
-
 # Spawn a shell with virtualenv activated
 pipenv shell
 
+# Install dependencies
+pipenv install
+
 # Enter python environment
 python
+
+# When you're done, you can exit
+exit
 ```
 
 ## Writing Test Cases

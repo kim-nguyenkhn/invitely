@@ -20,7 +20,7 @@ def create_app():
         db.create_all()
         
         # Clear data for all tables, https://gist.github.com/vkotovv/6281951
-        # clear_data(db.session)
+        clear_data(db.session)
 
         # Register routes
         app.register_blueprint(healthcheck.blueprint)

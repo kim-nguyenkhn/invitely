@@ -37,4 +37,4 @@ class Guest(db.Model):
     accepted = db.Column(db.Boolean, nullable=False)
 
     # Relationships
-    events = db.relationship("Events", backref="guests", lazy=True)
+    events = db.relationship("Event", backref="guest", lazy=True)

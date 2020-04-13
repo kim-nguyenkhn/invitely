@@ -46,6 +46,9 @@ flask run
 exit
 ```
 
+#### Troubleshooting
+- Try deleting `app.db` if any schema/model changes are made.
+
 ## Writing Test Cases
 
 Ben Jackson wrote a great [article](https://engineering.ezcater.com/the-case-against-react-snapshot-testing) on why we SHOULDN'T do snapshot testing.

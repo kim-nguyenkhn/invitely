@@ -41,6 +41,7 @@ pipenv install
 
 # Run the Flask app
 export FLASK_APP=app
+export FLASK_ENV=development
 flask run
 
 # When you're done, you can exit

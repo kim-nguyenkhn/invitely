@@ -1,7 +1,7 @@
 from typing import Any
 from webargs.flaskparser import FlaskParser
 
-from app.exceptions import InvalidRequestParameters
+from app.utils.exceptions import InvalidRequestParameters
 
 parser = FlaskParser()
 

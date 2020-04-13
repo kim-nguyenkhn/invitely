@@ -2,13 +2,13 @@ from typing import Any
 from typing import Dict
 
 from app import db
-from app.models.sqlite import models
+from app.models.sqlite.event import Event
 from app.utils.types import JsonDict
 
 
 class EventController():
     def __init__(self) -> None:
-        self.M = models.Event
+        self.M = Event
 
     def create(self, args: JsonDict) -> JsonDict:
         m = self.M(**args)

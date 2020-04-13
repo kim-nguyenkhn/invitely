@@ -13,7 +13,7 @@ def create_app():
     db.init_app(app)
 
     with app.app_context():
-        from app.models.sqlite import models
+        from app.models.sqlite import event, guest, user
         from app.routes import healthcheck, events, users
 
         # Create tables for our models

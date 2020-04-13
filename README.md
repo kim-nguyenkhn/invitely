@@ -33,15 +33,23 @@ Requirements:
 ```shell
 cd flask-service/
 
-# Install dependencies
-pipenv install
-
 # Spawn a shell with virtualenv activated
 pipenv shell
 
-# Enter python environment
-python
+# Install dependencies
+pipenv install
+
+# Run the Flask app
+export FLASK_APP=app
+export FLASK_ENV=development
+flask run
+
+# When you're done, you can exit
+exit
 ```
+
+#### Troubleshooting
+- Try deleting `app.db` if any schema/model changes are made.
 
 ## Writing Test Cases
 

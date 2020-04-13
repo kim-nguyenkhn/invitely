@@ -1,0 +1,1 @@
+# This directory contains Flask blueprints (routes).

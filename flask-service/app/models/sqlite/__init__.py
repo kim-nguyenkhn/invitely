@@ -1,0 +1,1 @@
+# The mdoels under this directory conform to sqlite models.

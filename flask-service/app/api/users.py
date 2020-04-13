@@ -4,7 +4,7 @@ from typing import Any
 
 from app.controllers import users
 from app.schemas.users import CreateUserSchema
-from app.routes.parser import parser
+from app.api.parser import parser
 from app.utils.types import FlaskViewResult, JsonDict
 
 blueprint = Blueprint('users', __name__)

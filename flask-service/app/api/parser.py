@@ -1,15 +1,12 @@
 from flask import jsonify, make_response
-from . import api
+from typing import Any
+from webargs.flaskparser import FlaskParser
 
+from app.utils.exceptions import InvalidRequestParameters
 
-@api.errorhandler(400)
-def bad_request(error):
-    return make_response(jsonify({'error': 'Bad request'}), 400)
+parser = FlaskParser()
 
-
-@api.errorhandler(404)
-def not_found(error):
-    return make_response(jsonify({'error': 'Not found'}), 404)
-
-
-# TO DO: Add error handler for unauthorised
+# TODO: Figure out what type error is so we don't have to use Any here
+@parser.error_handler
+def handle_error(error: Any, *args: Any, **kwargs: Any) -> None:
+    raise InvalidRequestParameters(error.messages)

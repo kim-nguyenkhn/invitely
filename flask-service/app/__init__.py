@@ -14,7 +14,7 @@ def create_app():
 
     with app.app_context():
         from app.models.sqlite import event, guest, user
-        from app.routes import healthcheck, events, users
+        from app.api import healthcheck, events, users
 
         # Create tables for our models
         db.create_all()

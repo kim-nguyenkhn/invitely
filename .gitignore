@@ -18,3 +18,8 @@ package-lock.json
 .venv
 venv/
 .idea
+
+__pycache__/
+*.py[cod]
+*$py.class
+app.db

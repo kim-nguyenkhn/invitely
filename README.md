@@ -8,16 +8,38 @@ Technologies used:
 
 ## Quickstart
 
+### Expo Mobile App
 Requirements:
 - Install Node Version Manager (nvm): https://github.com/nvm-sh/nvm. This will install NodeJS.
 - Download command line tool: `npm install expo-cli --global`
 
 ```shell
-git clone <invitely.git thing>
 cd expo-app/
+
+# Install dependencies
+yarn
+
+# Start up the expo app
 yarn start
 
 # Follow instructions to scan the app QR code using the Expo Android app to run it on your device
+```
+
+### Flask Backend Service
+Requirements:
+- `python v3.8` or higher - use `pyenv` to manage your python versions.
+
+```shell
+cd flask-service/
+
+# Install dependencies
+pipenv install
+
+# Spawn a shell with virtualenv activated
+pipenv shell
+
+# Enter python environment
+python
 ```
 
 ## Writing Test Cases

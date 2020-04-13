@@ -28,6 +28,7 @@ yarn start
 ### Flask Backend Service
 Requirements:
 - `python v3.8` or higher - use `pyenv` to manage your python versions.
+- Install `pipenv` to manage your dependencies & virtual environment: https://github.com/pypa/pipenv
 
 ```shell
 cd flask-service/

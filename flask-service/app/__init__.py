@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-from app import config
+from app import config, routes
 
 db = SQLAlchemy()
 
@@ -11,10 +11,13 @@ def create_app():
     app.config.from_object(config.Config)
     db.init_app(app)
 
+    app.register_blueprint(routes.blueprint)
+
     with app.app_context():
-        from . import models
+        from app import models
 
         # Create tables for our models
         db.create_all()
 
         return app
+

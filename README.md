@@ -39,8 +39,8 @@ pipenv shell
 # Install dependencies
 pipenv install
 
-# Enter python environment
-python
+# Run the Flask app
+flask run
 
 # When you're done, you can exit
 exit

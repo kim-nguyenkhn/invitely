@@ -4,7 +4,7 @@ from typing import Any
 
 from app.controllers import events
 from app.schemas.events import CreateEventSchema
-from app.routes.parser import parser
+from app.api.parser import parser
 from app.utils.types import FlaskViewResult, JsonDict
 
 blueprint = Blueprint('events', __name__)
